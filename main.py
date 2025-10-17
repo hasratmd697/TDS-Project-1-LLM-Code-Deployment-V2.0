@@ -152,9 +152,24 @@ def handle_request():
         return jsonify(error_response), 500
 
 
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({"status": "healthy"}), 200
+# @app.route("/health", methods=["GET"])
+# def health():
+#     return jsonify({"status": "healthy"}), 200
+
+@app.route("/", methods=["GET"])
+def index():
+    """Root endpoint - provides API information"""
+    return jsonify({
+        "service": "LLM Code Deployment API",
+        "status": "running",
+        "version": "2.0",
+        "description": "Automated code generation and GitHub deployment service",
+        "endpoints": {
+            "POST /api-endpoint": "Main API endpoint for code deployment requests",
+            "GET /health": "Health check endpoint"
+        },
+        "github": "https://github.com/hasratmd697/TDS-Project-1-LLM-Code-Deployment-V2.0"
+    }), 200
 
 
 def main():
